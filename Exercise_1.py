@@ -18,9 +18,11 @@ class myStack:
         if self.count >= 1:
             self.count -= 1
             return self.stack.pop()
+        else:
+            return None
 
     def peek(self):
-        return self.stack[-1]
+        return self.stack[-1] if not self.isEmpty() else None
 
     def size(self):
         return self.count

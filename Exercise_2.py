@@ -1,5 +1,6 @@
+# The intution here is like inserting in reverese order
 # Time Complexity : O(1) for push, O(n) for pop
-# Space Complexity : O(n) for storing n nodes in stack
+# Space Complexity : O(1) for storing n nodes in stack
 class Node:
     def __init__(self, data):
         self.data = data
@@ -8,25 +9,19 @@ class Node:
 
 class Stack:
     def __init__(self):
-        self.head = self.tail = Node(-1)
-        self.count = 0
+        self.head = None
 
     def push(self, data):
-        self.tail.next = Node(data)
-        self.tail = self.tail.next
-        self.count+=1
+        new_node =  Node(data)
+        new_node.next = self.head
+        self.head = new_node
 
     def pop(self):
-        if self.count >= 1:
-            curr = self.head.next
-            while curr.next and curr.next.next:
-                curr = curr.next
-
-            res = curr.next.data if curr.next else curr.data
-            curr.next = None
-            self.tail = curr
-            self.count-=1
-            return res
+       if self.head is None:
+            return None            # Stack is empty
+       pop_value = self.head.data # Store the value to return
+       self.head = self.head.next   # Move the top pointer down
+       return pop_value
 
 
 a_stack = Stack()
